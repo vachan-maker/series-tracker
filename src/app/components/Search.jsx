@@ -5,6 +5,7 @@ export default function Search() {
     const [loading, setLoading] = useState(false)
     const [results, setResults] = useState([])
     const [input, setInput] = useState("")
+    const [isActive,setIsActive] = useState(false)
 
 
     const searchParams = useSearchParams()
@@ -57,7 +58,9 @@ export default function Search() {
     }, [input])
     return (
         <>
-            <input type="text" value={input} onChange={(e) => { setInput(e.target.value) }}/>
+            <div className="">
+            <input type="text" value={input} onChange={(e) => { setInput(e.target.value) }} className="border rounded-md w-72 px-2 py-2 w-2xl"/>
+            </div>
             {loading && <h1>Loading Data....</h1>}
                 {!loading && results.length > 0 && (
                     <ul>
