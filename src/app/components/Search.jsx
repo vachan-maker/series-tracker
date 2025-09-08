@@ -1,10 +1,10 @@
 'use client'
-import { useSearchParams, usePathname,useRouter } from "next/navigation"
+import { useSearchParams, usePathname, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 export default function Search() {
-    const [loading,setLoading] = useState(false)
-    const [results,setResults] = useState([])
-    const [input,setInput] = useState("")
+    const [loading, setLoading] = useState(false)
+    const [results, setResults] = useState([])
+    const [input, setInput] = useState("")
 
 
     const searchParams = useSearchParams()
@@ -12,14 +12,14 @@ export default function Search() {
     const { replace } = useRouter()
     async function searchShows(query) {
         try {
-        setLoading(true)
-        const res = await fetch(`https://api.tvmaze.com/search/shows?q=${query}`)
-        if(!res.ok) {
-            throw new Error("Failed to fetch data!")
-        }
-        const data = await res.json()
-        return data
-        }catch(error) {
+            setLoading(true)
+            const res = await fetch(`https://api.tvmaze.com/search/shows?q=${query}`)
+            if (!res.ok) {
+                throw new Error("Failed to fetch data!")
+            }
+            const data = await res.json()
+            return data
+        } catch (error) {
             console.error(error)
             return []
         }
@@ -29,8 +29,8 @@ export default function Search() {
     }
     function updateSearchParams(query) {
         const params = new URLSearchParams(searchParams)
-        if(query) {
-            params.set('query',query)
+        if (query) {
+            params.set('query', query)
         }
         else {
             params.delete('query')
@@ -39,26 +39,36 @@ export default function Search() {
     }
     async function handleSearch(query) {
         updateSearchParams(query)
-        const data =  await searchShows(query)
+        const data = await searchShows(query)
         setResults(data)
         console.log(data)
 
     }
-    useEffect(()=>{
-        const timeout = setTimeout(()=>{
-            if(input.trim() !== "") {
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            if (input.trim() !== "") {
                 handleSearch(input)
             } else {
                 updateSearchParams("")
                 setResults([])
             }
-        },1000)
+        }, 1000)
         return () => clearTimeout(timeout)
-    },[input])
+    }, [input])
     return (
         <>
-            <input type="text" value={input} onChange={(e)=>{setInput(e.target.value)}}/>
+            <input type="text" value={input} onChange={(e) => { setInput(e.target.value) }} />
             {loading && <h1>Loading Data....</h1>}
+            <ul>
+                {!loading && results.length > 0 && (
+                    results.map((item) => {
+                        return <li key={item.show.id}>
+                            <img src={item.show.image.medium}></img>
+                            {item.show.name}
+                            </li>
+                    })
+                )}
+            </ul>
         </>
     )
 }
