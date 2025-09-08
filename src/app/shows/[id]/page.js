@@ -3,7 +3,7 @@ import { use, useEffect, useState } from "react"
 export default function Shows({params}) {
     const { id }= use(params)
     const [loading,setLoading] = useState(false)
-    const [data,setData] = useState([])
+    const [data,setData] = useState("")
     async function getShowDetails(id) {
         setLoading(false)
         try {
@@ -28,14 +28,19 @@ export default function Shows({params}) {
     useEffect(()=>{
         getShowDetails(id)
     },[id])
+    if (loading) return <p>Loading Data</p>
+    if (!data) return <p>Data not found</p>
     return (
         <>
-        {loading && <p>Loading Data..</p>}
-        {!data && <p>Details not found</p>}
-
         {!loading && (<div className="flex flex-col max-w-8/12 mx-auto my-0 pt-8">
         {/* z */}
+        <div className="flex flex-col">
+        <div className="flex flex-row">
+        <img src={data.image?(data.image.original || data.image.medium):("https://dummyimage.com/210x295/cccccc/000000&text=No+Image")} className="w-3xs rounded"/>
         <h1 className="text-4xl">{data.name}</h1>
+        </div>
+        </div>
+        
         <p>{data.summary.replace(/<[^>]+>/g, "")}</p>
         </div>)}
         </>
