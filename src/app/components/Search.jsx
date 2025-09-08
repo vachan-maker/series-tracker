@@ -1,9 +1,10 @@
 'use client'
 import { useSearchParams, usePathname,useRouter } from "next/navigation"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 export default function Search() {
     const [loading,setLoading] = useState(false)
     const [results,setResults] = useState([])
+    const [input,setInput] = useState("")
 
 
     const searchParams = useSearchParams()
@@ -43,9 +44,20 @@ export default function Search() {
         console.log(data)
 
     }
+    useEffect(()=>{
+        const timeout = setTimeout(()=>{
+            if(input.trim() !== "") {
+                handleSearch(input)
+            } else {
+                updateSearchParams("")
+                setResults([])
+            }
+        },1000)
+        return () => clearTimeout(timeout)
+    },[input])
     return (
         <>
-            <input type="text" onChange={(e)=>handleSearch(e.target.value)}/>
+            <input type="text" value={input} onChange={(e)=>{setInput(e.target.value)}}/>
             {loading && <h1>Loading Data....</h1>}
         </>
     )
