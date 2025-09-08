@@ -57,18 +57,18 @@ export default function Search() {
     }, [input])
     return (
         <>
-            <input type="text" value={input} onChange={(e) => { setInput(e.target.value) }} />
+            <input type="text" value={input} onChange={(e) => { setInput(e.target.value) }}/>
             {loading && <h1>Loading Data....</h1>}
-            <ul>
                 {!loading && results.length > 0 && (
-                    results.map((item) => {
-                        return <li key={item.show.id}>
+                    <ul>
+                    {results.map((item) => {
+                        return <li key={item.show.id} className="flex flex-row mb-4">
                             <img src={item.show.image.medium}></img>
-                            {item.show.name}
+                            <h2 className="text-2xl">{item.show.name}</h2>
                             </li>
-                    })
+                    })}
+                    </ul>
                 )}
-            </ul>
         </>
     )
 }
