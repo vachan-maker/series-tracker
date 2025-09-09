@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from "react"
 import SeasonItem from "./SeasonItem"
+import Episodes from "./Episodes"
 
 export default function Seasons({id}) {
     const [data,setData] = useState([])
@@ -39,6 +40,7 @@ export default function Seasons({id}) {
             }
 
         </select>
+        <Episodes season={season}/>
         </>
     )
 }
