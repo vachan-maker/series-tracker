@@ -5,6 +5,7 @@ import SeasonItem from "./SeasonItem"
 export default function Seasons({id}) {
     const [data,setData] = useState([])
     const [loading,setLoading] = useState(false)
+    const [season,setSeason] = useState(1)
     async function fetchSeasons(id) {
         setLoading(true)
         try {
@@ -28,15 +29,16 @@ export default function Seasons({id}) {
     },[])
     return (
         <>
-        <h2 className="text-4xl">Seasons</h2>
-        <div className="flex flex-row flex-wrap mt-5 gap-8">
+        <h2 className="text-4xl">Seasons & Episodes</h2>
+        <b className="mb-2 mt-4">Select Season</b>
+        <select className="bg-slate-100 px-4 py-3 w-1/2 rounded" value={season} onChange={(e)=>{setSeason(e.target.value)}}>
             {
                 data.map((item,index) =>{
                    return <SeasonItem data={item} key={index}/>
                 })
             }
 
-        </div>
+        </select>
         </>
     )
 }
