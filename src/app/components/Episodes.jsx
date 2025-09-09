@@ -15,7 +15,7 @@ export default function Episodes({season}) {
         <div className="flex flex-col">  
         {
             data.map((episode)=> {
-                return <EpisodeItem episode={episode} key={episode.id} seasonNumber={season}/>
+                return <EpisodeItem episode={episode} key={episode.id}/>
             })
         }
         </div>
