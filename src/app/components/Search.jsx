@@ -58,6 +58,16 @@ export default function Search() {
         }, 1000)
         return () => clearTimeout(timeout)
     }, [input])
+    useEffect(()=>async()=>{
+        const query = searchParams.get("query" || "")
+        if(query) {
+            const data = await searchShows(query)
+            setResults(data)
+        }
+        else {
+            setResults([])
+        }
+    },[searchParams])
     return (
         <>
             <SearchBar input={input} setInput={setInput}/>
