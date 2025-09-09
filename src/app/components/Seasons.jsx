@@ -6,7 +6,7 @@ import Episodes from "./Episodes"
 export default function Seasons({id}) {
     const [data,setData] = useState([])
     const [loading,setLoading] = useState(false)
-    const [season,setSeason] = useState(1)
+    const [season,setSeason] = useState()
     async function fetchSeasons(id) {
         setLoading(true)
         try {
@@ -18,6 +18,7 @@ export default function Seasons({id}) {
         console.log("Seasons")
         console.log(data)
         setData(data)
+        setSeason((id)=>data.id)
         }catch(error) {
             console.error("Error")
         }
@@ -27,7 +28,7 @@ export default function Seasons({id}) {
     }
     useEffect(()=>{
         fetchSeasons(id)
-    },[])
+    },[season])
     return (
         <>
         <h2 className="text-4xl">Seasons & Episodes</h2>
