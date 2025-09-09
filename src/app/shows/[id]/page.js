@@ -1,6 +1,8 @@
 'use client'
+import SearchResults from "@/app/components/SearchResults"
 import { use, useEffect, useState } from "react"
 import Image from "next/image"
+import Seasons from "@/app/components/Seasons"
 export default function Shows({params}) {
     const { id }= use(params)
     const [loading,setLoading] = useState(false)
@@ -33,7 +35,8 @@ export default function Shows({params}) {
     if (!data) return ""
     return (
         <>
-        {!loading && (<div className="flex flex-col max-w-8/12 mx-auto my-0 pt-8">
+        {!loading && (<>
+            <div className="flex flex-col max-w-8/12 mx-auto my-0 pt-8">
         {/* z */}
         <div className="flex flex-row gap-4">
         
@@ -43,9 +46,11 @@ export default function Shows({params}) {
         <p>{data.summary.replace(/<[^>]+>/g, "")}</p>
         </div>
         </div>
+        <Seasons id={data.id}/>
         
-        
-        </div>)}
+        </div>
+    
+    </>)}
         </>
     )
 }

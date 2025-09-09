@@ -41,7 +41,7 @@ export default function Search() {
         replace(`${pathName}?${params.toString()}`);
     }
     async function handleSearch(query) {
-        updateSearchParams(query)
+        updateSearchParams(input)
         const data = await searchShows(query)
         setResults(data)
         console.log(data)
@@ -56,6 +56,7 @@ export default function Search() {
                 setResults([])
             }
         }, 1000)
+        
         return () => clearTimeout(timeout)
     }, [input])
     useEffect(()=>async()=>{
