@@ -1,9 +1,10 @@
 'use client'
 import { use, useEffect, useState } from "react"
+import Image from "next/image"
 export default function Shows({params}) {
     const { id }= use(params)
     const [loading,setLoading] = useState(false)
-    const [data,setData] = useState("")
+    const [data,setData] = useState(null)
     async function getShowDetails(id) {
         setLoading(false)
         try {
@@ -29,19 +30,21 @@ export default function Shows({params}) {
         getShowDetails(id)
     },[id])
     if (loading) return <p>Loading Data</p>
-    if (!data) return <p>Data not found</p>
+    if (!data) return ""
     return (
         <>
         {!loading && (<div className="flex flex-col max-w-8/12 mx-auto my-0 pt-8">
         {/* z */}
-        <div className="flex flex-col">
-        <div className="flex flex-row">
+        <div className="flex flex-row gap-4">
+        
         <img src={data.image?(data.image.original || data.image.medium):("https://dummyimage.com/210x295/cccccc/000000&text=No+Image")} className="w-3xs rounded"/>
+        <div className="flex flex-col gap-5">
         <h1 className="text-4xl">{data.name}</h1>
+        <p>{data.summary.replace(/<[^>]+>/g, "")}</p>
         </div>
         </div>
         
-        <p>{data.summary.replace(/<[^>]+>/g, "")}</p>
+        
         </div>)}
         </>
     )
