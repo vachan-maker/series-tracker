@@ -1,5 +1,6 @@
 'use client'
 import SearchResults from "@/app/components/SearchResults";
+import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 export default function Search() {
@@ -7,16 +8,28 @@ export default function Search() {
     const query = searchParams.get('q')
     const [loading, setLoading] = useState(false)
     const [data, setData] = useState([])
+    const router = useRouter()
+    const [isSingleShow,setIsSingleShow] = useState(false)
     async function searchShows(query) {
         try {
             setLoading(true)
-            const res = await fetch(`https://api.tvmaze.com/search/shows?q=${query}`)
-            if (!res.ok) {
-                throw new Error("Failed to fetch data!")
+            let res = await fetch(`https://api.tvmaze.com/singlesearch/shows?q=${query}`)
+            if (res.ok) {
+                let show = await res.json()
+                setData([{show}])
+                setIsSingleShow(true)
+                return
             }
-            const data = await res.json()
+            setIsSingleShow(false)
+            res = await fetch(`https://api.tvmaze.com/search/shows?q=${query}`)
+            let data = await res.json()
             setData(data)
-            console.log(data)
+
+            if (!res.ok) {
+                throw new Error("Error fetching data from API")
+            }
+            
+            
         } catch (error) {
             console.error(error)
             return []
@@ -28,8 +41,15 @@ export default function Search() {
     useEffect(() => {
         searchShows(query)
     }, [query])
-    if (loading) return <h1>Loading</h1>
-    return (
+    useEffect(()=>{
+        if(!loading && data.length === 1) {
+
+            router.push(`/shows/${data[0].show.id}`)
+        }
+    },[data,loading,router])
+    // if (loading) return <h1>Loading</h1>
+    //if there are more than a single show or multiple search results for the term , display them otherwise,navigate to the single show page
+    if (!isSingleShow) return (
         <div className="w-full h-full flex flex-col items-center pt-10 gap-14">
             <ul>
                 {data.map((item) => {
