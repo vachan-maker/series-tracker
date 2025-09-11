@@ -1,4 +1,6 @@
 export default function SearchResults({ item }) {
+    console.log("Item passed from parent",item)
+    if(!item || item.length === 0) return <h1>No Results</h1>
     return (
         <>
             {item.show.image ? (<img src={item.show.image.medium} alt={item.show.name} className="mr-4 rounded hover:shadow-2xl" />) : <img src="https://dummyimage.com/210x295/cccccc/000000&text=No+Image" />}
