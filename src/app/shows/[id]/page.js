@@ -3,6 +3,7 @@ import SearchResults from "@/app/components/SearchResults"
 import { use, useEffect, useState } from "react"
 import Image from "next/image"
 import Seasons from "@/app/components/Seasons"
+import Cast from "@/app/components/Cast"
 export default function Shows({params}) {
     const { id }= use(params)
     const [loading,setLoading] = useState(false)
@@ -46,7 +47,9 @@ export default function Shows({params}) {
         <p>{data.summary.replace(/<[^>]+>/g, "")}</p>
         </div>
         </div>
+        <Cast id={data.id}/>
         <Seasons id={data.id}/>
+        
         
         </div>
     
