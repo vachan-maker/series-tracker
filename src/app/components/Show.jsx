@@ -1,3 +1,5 @@
+import Genres from "./Genres";
+
 export default function Show({ data }) {
     return (
         <div className="flex flex-row gap-4">
@@ -5,6 +7,7 @@ export default function Show({ data }) {
             <div className="flex flex-col gap-5">
                 <h1 className="text-4xl">{data.name}</h1>
                 <p>{data.summary.replace(/<[^>]+>/g, "")}</p>
+                <Genres genre={data.genres}/>
             </div>
         </div>
     )
