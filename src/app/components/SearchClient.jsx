@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import NavBar from "./NavBar";
+import SearchBar from "./SearchBar";
 export default function SearchClient() {
     const searchParams = useSearchParams()
     const query = searchParams.get('q')
@@ -45,6 +46,7 @@ export default function SearchClient() {
         <>
         <NavBar/>
         <div className="w-full h-full flex flex-col items-center pt-10 gap-14">
+            <SearchBar/>
             <ul>
                 {data.map((item) => {
                     return <li key={item.show.id} className="flex flex-row mb-4"><SearchResults item={item} />
