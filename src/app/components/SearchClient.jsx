@@ -3,6 +3,7 @@ import SearchResults from "@/app/components/SearchResults";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import NavBar from "./NavBar";
 export default function SearchClient() {
     const searchParams = useSearchParams()
     const query = searchParams.get('q')
@@ -41,6 +42,8 @@ export default function SearchClient() {
     // if (loading) return <h1>Loading</h1>
     //if there are more than a single show or multiple search results for the term , display them otherwise,navigate to the single show page
     if (!isSingleShow) return (
+        <>
+        <NavBar/>
         <div className="w-full h-full flex flex-col items-center pt-10 gap-14">
             <ul>
                 {data.map((item) => {
@@ -49,6 +52,7 @@ export default function SearchClient() {
                 })}
             </ul>
         </div>
+        </>
     )
 
 }

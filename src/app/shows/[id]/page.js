@@ -3,6 +3,7 @@ import { use, useEffect, useState } from "react"
 import Seasons from "@/app/components/Seasons"
 import Cast from "@/app/components/Cast"
 import Show from "@/app/components/Show"
+import NavBar from "@/app/components/NavBar"
 export default function Shows({ params }) {
     const { id } = use(params)
     const [loading, setLoading] = useState(false)
@@ -36,6 +37,7 @@ export default function Shows({ params }) {
     return (
         <>
             {!loading && (<>
+                <NavBar/>
                 <div className="flex flex-col max-w-8/12 mx-auto my-0 pt-8">
                     <Show data={data}/>
                     <Cast id={data.id} />
