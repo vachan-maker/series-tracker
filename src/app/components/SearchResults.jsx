@@ -8,7 +8,7 @@ export default function SearchResults({ item }) {
                 <a href={`/shows/${item.show.id}`} className="hover:underline underline-offset-4"><h2 className="text-2xl">{item.show.name}</h2></a>
                 <p><b>Premiered On: </b> {item.show.premiered}</p>
                 <p><b>Ended On: </b>{item.show.ended}</p>
-                {item.show.summary ? (<p className="line-clamp-3 max-w-lg">{item.show.summary.replace(/<[^>]+>/g, "")}</p>) : ("")}
+                {item.show.summary ? (<p className="line-clamp-3 max-w-lg">{item.show.summary.replace(/<[^>]+>/g, "")}</p>) : ("No description")}
             </div>
         </>
     )

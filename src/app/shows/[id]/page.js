@@ -1,7 +1,5 @@
 'use client'
-import SearchResults from "@/app/components/SearchResults"
 import { use, useEffect, useState } from "react"
-import Image from "next/image"
 import Seasons from "@/app/components/Seasons"
 import Cast from "@/app/components/Cast"
 import Show from "@/app/components/Show"
