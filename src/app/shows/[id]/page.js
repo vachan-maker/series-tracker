@@ -38,7 +38,7 @@ export default function Shows({ params }) {
         <>
             {!loading && (<>
                 <NavBar/>
-                <div className="flex flex-col max-w-8/12 mx-auto my-0 pt-8">
+                <div className="flex flex-col lg:max-w-8/12 px-4 mx-auto my-0 pt-8">
                     <Show data={data}/>
                     <Cast id={data.id} />
                     <Seasons id={data.id} />
