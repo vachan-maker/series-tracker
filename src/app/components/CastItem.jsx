@@ -5,8 +5,8 @@ export default function CastItem({castData}) {
                 <img src={castData.character.image.medium}/>
             ):(castData.person.image.medium)
             ):(<h1>IMage not found</h1>)}
-            <p>{castData.person.name}</p>
-            <p>{castData.character.name}</p>
+            <p className="text-xs">{castData.person.name}</p>
+            <p className="text-xs">{castData.character.name}</p>
         </div>
     )
 }

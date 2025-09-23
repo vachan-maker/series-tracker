@@ -23,7 +23,7 @@ export default function Cast({id}) {
     return (
         <div className="flex flex-col mt-8">
             <h2 className="text-4xl mb-2">Cast</h2>
-        <div className="flex flex-row gap-6 overflow-y-auto">
+        <div className="flex flex-row sm:gap-2 lg:gap-6 overflow-y-auto">
         {data.map((item)=> {
             return (
                 <CastItem castData={item} key={item.person.id}/>
