@@ -13,18 +13,9 @@ export default function Search() {
     async function searchShows(query) {
         try {
             setLoading(true)
-            let res = await fetch(`https://api.tvmaze.com/singlesearch/shows?q=${query}`)
-            if (res.ok) {
-                let show = await res.json()
-                setData([{show}])
-                setIsSingleShow(true)
-                return
-            }
-            setIsSingleShow(false)
-            res = await fetch(`https://api.tvmaze.com/search/shows?q=${query}`)
-            let data = await res.json()
+            const res = await fetch(`https://api.tvmaze.com/search/shows?q=${query}`)
+            const data = await res.json()
             setData(data)
-
             if (!res.ok) {
                 throw new Error("Error fetching data from API")
             }
