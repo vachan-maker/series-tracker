@@ -17,7 +17,7 @@ export default function SearchBar({}) {
 
     return (
         <>
-        <input type="text" value={input} onChange={(e) => { setInput(e.target.value) }} className="border rounded-md px-2 py-2 w-2xl" onKeyDown={(e)=>handleKeyDown(e)}/>
+        <input type="text" value={input} onChange={(e) => { setInput(e.target.value) }} className="border rounded-md px-2 py-2 w-[60%]" onKeyDown={(e)=>handleKeyDown(e)} placeholder="Type anything to search"/>
         </>
     )
 }
