@@ -1,3 +1,4 @@
+import Externals from "./Externals";
 import Genres from "./Genres";
 
 export default function Show({ data }) {
@@ -8,6 +9,7 @@ export default function Show({ data }) {
                 <h1 className="text-4xl text-center lg:text-left">{data.name}</h1>
                 <p>{data.summary.replace(/<[^>]+>/g, "")}</p>
                 <Genres genre={data.genres}/>
+                <Externals externals={data.externals}/>
             </div>
         </div>
     )
